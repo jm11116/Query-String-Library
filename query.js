@@ -134,7 +134,7 @@ class QueryStringHandler {
                     query_string = query_string + element + "&";
                 }
             });
-            query_string = query_string.substring(0, query_string.length - 1);
+            query_string = query_string.substring(0, query_string.length - 1); //Removes trailing ampersand
             window.history.replaceState("", "", this.parts("url") + query_string);
         } else {
             return false;
