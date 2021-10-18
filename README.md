@@ -28,3 +28,7 @@
 **replaceFullString()** - will replace the entire query string with a new query string when passed an array of key/value pairs.
 
 Most functions will return false if something goes wrong or the query string is malformed. More comprehensive error-checking will be available in a future version.
+
+# Notes
+
+Because key/value pairs are odd and even, the modulo operator is often used to perform tick/tock operations.
