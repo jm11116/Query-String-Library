@@ -141,7 +141,6 @@ class QueryStringHandler {
     updateValue(key, new_value){
         if (this.present() && key != undefined && new_value != undefined){
             var query_string = this.parts("query");
-            console.log(query_string);
             if (query_string.indexOf(key) != -1){
                 var value_to_replace = this.getValueFromKey(key);
                 query_string = query_string.replaceAll(value_to_replace, new_value);
