@@ -83,6 +83,7 @@ class QueryStringHandler {
                 return false;
             }
         }
+        //Should return array if multiple keys of same name are present
     }
     getKeyFromValue(value){
         if (this.present()){
@@ -96,6 +97,7 @@ class QueryStringHandler {
         } else {
             return false;
         }
+        //Should return array if multiple values of same name are present
     }
     toObject(){
         if (this.present()){
