@@ -132,6 +132,29 @@ class QueryStringHandler {
             return true;
         }
     }
+    removeKeyValue(key){
+        if (this.present() && this.getKeyFromValue(key) != false){
+            var query_string = this.parts("query");
+            var value = this.getValueFromKey(key);
+            var lead_amp_loc = query_string.indexOf(key) - 1;
+            var trail_amp_loc = query_string.indexOf(value) + value.length;
+            if (this.toKeyValuesArray().length === 2){ //If key/value pair to delete is the only key/value pair
+            window.history.replaceState("", "", this.parts("url"));
+            } else if (query_string.charAt(lead_amp_loc) === "&" && query_string.charAt(trail_amp_loc) === "&"){ //If ampersands on both sides
+                query_string = query_string.replaceAll("&" + key + "=" + value + "&", "");
+                window.history.replaceState("", "", this.parts("url") + "?" + query_string);
+            } else if (query_string.charAt(lead_amp_loc) === "&" && query_string.charAt(trail_amp_loc) != "&"){ //If ampersand on left
+                query_string = query_string.replaceAll("&" + key + "=" + value, "");
+                window.history.replaceState("", "", this.parts("url") + "?" + query_string);
+            } else if (query_string.charAt(lead_amp_loc) != "&" && query_string.charAt(trail_amp_loc) === "&"){ //If ampersand on right
+                query_string = query_string.replaceAll(key + "=" + value + "&", "");
+                window.history.replaceState("", "", this.parts("url") + "?" + query_string);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
     removeAll(){
         if (this.present()){
             window.history.replaceState("", "", this.parts("url"));
