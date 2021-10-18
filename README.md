@@ -27,7 +27,7 @@
 
 **replaceFullString()** - will replace the entire query string with a new query string when passed an array of key/value pairs.
 
-Functions that don't return data will return true on success and false if something goes wrong or the query string is malformed.
+Functions that don't return data will return true on success and false if something goes wrong or the query string is malformed. Success of all functions can be determined by checking for not false.
 
 # Notes
 
