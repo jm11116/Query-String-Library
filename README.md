@@ -3,27 +3,27 @@
 
 # Methods
 
-present() - returns true or false depending on whether or not a query string is detected in the URL.
+**present()** - returns true or false depending on whether or not a query string is detected in the URL.
 
-parts() = will return either the url or the query string as a string if passed either "url" or "query" as parameters.
+**parts()** = will return either the url or the query string as a string if passed either "url" or "query" as parameters.
 
-toKeyValuesArray() - will return a flat array containing all keys and values.
+**toKeyValuesArray()** - will return a flat array containing all keys and values.
 
-keys() - will return all keys from query string key/value pairs as an array.
+**keys()** - will return all keys from query string key/value pairs as an array.
 
-values() - will return all values from query string key/value pairs as an array.
+**values()** - will return all values from query string key/value pairs as an array.
 
-isValid() - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains and even number of key/value pairs, and if the string contains one less equals sign than there are ampersands.
+**isValid()** - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains and even number of key/value pairs, and if the string contains one less equals sign than there are ampersands.
 
-getValueFromKey() - will return the value of the key it is passed.
+**getValueFromKey()** - will return the value of the key it is passed.
 
-getKeyFromValue() - will return the key of the value it is passed.
+**getKeyFromValue()** - will return the key of the value it is passed.
 
-toObject() - will return the query string as a JavaScript object.
+**toObject()** - will return the query string as a JavaScript object.
 
-append() - will add a key/value pair to the end of the existing query string.
+**append()** - will add a key/value pair to the end of the existing query string.
 
-updateValue() - will change the value of a key in the query string when passed the key and the new value as parameters.
+**updateValue()** - will change the value of a key in the query string when passed the key and the new value as parameters.
 
-replaceFullString() - will replace the entire query string with a new query string when passed an array of key/value pairs.
+**replaceFullString()** - will replace the entire query string with a new query string when passed an array of key/value pairs.
 
