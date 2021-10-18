@@ -13,7 +13,7 @@
 
 **values()** - will return all values from query string key/value pairs as an array.
 
-**isValid()** - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains and even number of key/value pairs, and if the string contains one less ampersand than there are equals signs.
+**isValid()** - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains an even number of key/value pairs, and if the string contains one less ampersand than there are equals signs.
 
 **getValueFromKey()** - will return the value of the key it is passed.
 
