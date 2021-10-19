@@ -5,6 +5,8 @@
 
 **present()** - returns true or false depending on whether or not a query string is detected in the URL.
 
+**isValid()** - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains an even number of key/value pairs, and if the string contains one less ampersand than there are equals signs.
+
 **parts()** = will return either the url or the query string as a string if passed either "url" or "query" as parameters.
 
 **toKeyValuesArray()** - will return a flat array containing all keys and values.
@@ -12,8 +14,6 @@
 **keys()** - will return all keys from query string key/value pairs as an array.
 
 **values()** - will return all values from query string key/value pairs as an array.
-
-**isValid()** - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains an even number of key/value pairs, and if the string contains one less ampersand than there are equals signs.
 
 **getValueFromKey()** - will return the value of the key it is passed.
 
@@ -24,6 +24,8 @@
 **append()** - will add a key/value pair to the end of the existing query string.
 
 **removeKeyValue()** - will remove a key and its value when passed a valid key as a parameter.
+
+**updateKey()** - will change the name of a key in the query string when passed the key's existing name and its new name as arguments.
 
 **updateValue()** - will change the value of a key in the query string when passed the key and the new value as parameters.
 
