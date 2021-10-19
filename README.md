@@ -7,7 +7,7 @@
 
 **isValid()** - will return true or false depending on whether or not the query string is malformed. It does this by checking to see whether or not the query string contains an even number of key/value pairs, and if the string contains one less ampersand than there are equals signs.
 
-**parts(*parts*)** = will return either the url or the query string as a string if passed either "url" or "query" as parameters.
+**parts(*part*)** = will return either the url or the query string as a string if passed either "url" or "query" as parameters.
 
 **toKeyValuesArray()** - will return a flat array containing all keys and values.
 
