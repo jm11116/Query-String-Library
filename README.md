@@ -23,6 +23,8 @@
 
 **append()** - will add a key/value pair to the end of the existing query string.
 
+**removeKeyValue()** - will remove a key and its value when passed a valid key as a parameter.
+
 **updateValue()** - will change the value of a key in the query string when passed the key and the new value as parameters.
 
 **replaceFullString()** - will replace the entire query string with a new query string when passed an array of key/value pairs.
