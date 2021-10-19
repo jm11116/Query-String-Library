@@ -162,14 +162,30 @@ class QueryStringHandler {
             return false;
         }
     }
+    updateKey(key, new_name){
+        if (this.present() && key != undefined && new_name != undefined){
+            var query_string = this.parts("query");
+            if (query_string.indexOf(key) != -1){
+                query_string = query_string.replaceAll(key, new_name);
+                window.history.replaceState("", "", this.parts("url") + "?" + query_string);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
     updateValue(key, new_value){
         if (this.present() && key != undefined && new_value != undefined){
             var query_string = this.parts("query");
-            if (query_string.indexOf(key) != -1){
+            if (query_string.indexOf(key) != -1){ //If key present in string
                 var value_to_replace = this.getValueFromKey(key);
                 query_string = query_string.replaceAll(value_to_replace, new_value);
                 window.history.replaceState("", "", this.parts("url") + "?" + query_string);
                 return true;
+            } else {
+                return false;
             }
         } else {
             return false;
