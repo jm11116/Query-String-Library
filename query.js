@@ -136,16 +136,16 @@ class QueryStringHandler {
         if (this.present() && this.getKeyFromValue(key) != false){
             var query_string = this.parts("query");
             var value = this.getValueFromKey(key);
-            var lead_amp_loc = query_string.indexOf(key) - 1;
-            var trail_amp_loc = query_string.indexOf(value) + value.length;
+            var left_ampersand = query_string.charAt(query_string.indexOf(key) - 1) === "&"; //Bool
+            var right_ampersand = query_string.charAt(query_string.indexOf(value) + value.length) === "&"; //Bool
             if (this.toKeyValuesArray().length === 2){ //If key/value pair to delete is the only key/value pair
                 window.history.replaceState("", "", this.parts("url"));
                 return true; //Stop execution so following replaceState statement doesn't fire again
-            } else if (query_string.charAt(lead_amp_loc) === "&" && query_string.charAt(trail_amp_loc) === "&"){ //If ampersands on both sides
+            } else if (left_ampersand === true && right_ampersand === true){
                 query_string = query_string.replaceAll("&" + key + "=" + value + "&", "");
-            } else if (query_string.charAt(lead_amp_loc) === "&" && query_string.charAt(trail_amp_loc) != "&"){ //If ampersand on left
+            } else if (left_ampersand === true && right_ampersand === false){
                 query_string = query_string.replaceAll("&" + key + "=" + value, "");
-            } else if (query_string.charAt(lead_amp_loc) != "&" && query_string.charAt(trail_amp_loc) === "&"){ //If ampersand on right
+            } else if (left_ampersand === false && right_ampersand === true){
                 query_string = query_string.replaceAll(key + "=" + value + "&", "");
             }
             window.history.replaceState("", "", this.parts("url") + "?" + query_string);
