@@ -64,7 +64,7 @@ class QueryStringHandler {
     }
     parts(part){
         if (arguments.length != 1){
-            throw "Invalid arguments number: only 1 permitted";
+            throw "Invalid arguments number: 1 required";
         }
         if (part === undefined || !["url", "query"].includes(part)){
             throw "Invalid argument";
@@ -118,7 +118,7 @@ class QueryStringHandler {
     }
     getValueFromKey(key){
         if (arguments.length != 1){
-            throw "Invalid arguments number: only 1 permitted";
+            throw "Invalid arguments number: 1 required";
         }
         if (key === undefined){
             throw "Invalid argument";
@@ -151,7 +151,7 @@ class QueryStringHandler {
     }
     getKeyFromValue(value){
         if (arguments.length != 1){
-            throw "Invalid arguments number: only 1 permitted";
+            throw "Invalid arguments number: 1 required";
         }
         if (value === undefined){
             throw "Invalid argument";
@@ -202,7 +202,7 @@ class QueryStringHandler {
     }
     append(key, value){
         if (arguments.length != 2){
-            throw "Invalid arguments number: only 2 permitted";
+            throw "Invalid arguments number: 2 required";
         }
         if (key === undefined || value === undefined){
             throw "Invalid argument";
@@ -224,7 +224,7 @@ class QueryStringHandler {
     }
     removeKeyValue(key){
         if (arguments.length != 1){
-            throw "Invalid arguments number: only 1 permitted";
+            throw "Invalid arguments number: 1 required";
         }
         if (key === undefined){
             throw "Invalid argument";
@@ -259,7 +259,7 @@ class QueryStringHandler {
     }
     updateKey(key, new_name){
         if (arguments.length != 2){
-            throw "Invalid arguments number: only 2 permitted";
+            throw "Invalid arguments number: 2 required";
         }
         if (key === undefined || new_name === undefined){
             throw "Invalid argument";
@@ -285,7 +285,7 @@ class QueryStringHandler {
     }
     updateValue(key, new_value){
         if (arguments.length != 2){
-            throw "Invalid arguments number: only 2 permitted";
+            throw "Invalid arguments number: 2 required";
         }
         if (key === undefined || new_value === undefined){
             throw "Invalid argument";
@@ -311,7 +311,7 @@ class QueryStringHandler {
     }
     replaceFullString(key_value_array){
         if (arguments.length != 1){
-            throw "Invalid arguments number: only 1 permitted";
+            throw "Invalid arguments number: 1 required";
         }
         if (!Array.isArray(key_value_array)){
             throw "Argument must be array";
