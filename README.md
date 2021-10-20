@@ -19,9 +19,9 @@
 
 **values()** - will return all values from query string key/value pairs as an array.
 
-**getValueFromKey(*key*)** - will return the value of the key it is passed.
+**getValueFromKey(*key*)** - will return the value of the key it is passed, or an array of values if multiple keys have the same value.
 
-**getKeyFromValue(*value*)** - will return the key of the value it is passed.
+**getKeyFromValue(*value*)** - will return the key of the value it is passed, or an array of keys if multiple values have the same key.
 
 **toObject()** - will return the query string as a JavaScript object.
 
