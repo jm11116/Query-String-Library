@@ -312,9 +312,8 @@ class QueryStringHandler {
             var arg_data_type = "array";
         } else if (typeof keys_and_values === "object"){
             var arg_data_type = "object";
-        }
-        if (!["array", "object"].includes(arg_data_type)){
-            throw "Argument must be an object or array containg key/value pairs";
+        } else {
+            throw "Argument must be an object or array containing key/value pairs";
         }
         if (arg_data_type === "object"){
             var temp_array = [];
@@ -326,7 +325,7 @@ class QueryStringHandler {
         }
         keys_and_values.forEach((element) => { //Validate data in array
             if (typeof element === "object"){
-                throw "Invalid data type in object or array; multi-level objects not allowed"
+                throw "Invalid data type in object or array; multi-level objects not allowed";
             } else if (!["string", "number"].includes(typeof element)){
                 throw "Array/object contains invalid data type (only strings, numbers allowed)";
             }
