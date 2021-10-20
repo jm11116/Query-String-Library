@@ -33,7 +33,7 @@
 
 **updateValue(*key*, *new_value*)** - will change the value of all matching keys in the query string when passed the key and the new value as parameters.
 
-**replaceFullString(*key_value_array_or_object*)** - will replace the entire query string when passed an array or object containing key/value pairs.
+**replaceFullString(*keys_and_values*)** - will replace the entire query string when passed an array or object containing key/value pairs.
 
 **convertToLowerCase()** - will make the entire query string lowercase.
 
