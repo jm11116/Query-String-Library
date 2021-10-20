@@ -30,8 +30,8 @@ class QueryStringHandler {
         var found = false;
         if (this.present()){
             this.keys().forEach((element, i) => {
-                var key_array = this.keys();
-                key_array.splice(i, 1); //Changes array in place
+                var key_array = this.keys(); //Get a fresh array of keys
+                key_array.splice(i, 1); //Removes current element and then searches for it
                 if (key_array.includes(element)){
                     found = true;
                 }
