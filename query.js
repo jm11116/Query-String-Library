@@ -122,17 +122,24 @@ class QueryStringHandler {
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
+            var values = [];
             if (keyValuesArray.includes(key)){
-                var valuePos = keyValuesArray.indexOf(key) + 1;
-                return keyValuesArray[valuePos];
+                keyValuesArray.forEach((element, index) => {
+                    if (element == key && index != keyValuesArray.length){
+                        values.push(keyValuesArray[index + 1]);
+                    }
+                });
+                if (values.length === 1){
+                    return values[0];
+                } else {
+                    return values;
+                }
             } else {
                 return false; //Returns false to enable function to check if key present
             }
         } else {
             throw "Query string not found.";
         }
-        //Should return array if multiple keys of same name are present
-        //Implement by looping through with forEach and checking for key name match then getting value with indexOf + 1
     }
     getKeyFromValue(value){
         if (value === undefined){
