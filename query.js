@@ -317,11 +317,6 @@ class QueryStringHandler {
             throw "Argument must be an object or array containg key/value pairs";
         }
         if (arg_data_type === "object"){
-            Object.keys(keys_and_values).forEach((key) => {
-                if (typeof keys_and_values[key] === "object"){
-                    throw "Object must only contain key/value pairs; multi-level objects not allowed";
-                }
-            });
             var temp_array = [];
             Object.keys(keys_and_values).forEach((key) => {
                 temp_array.push(key);
@@ -329,6 +324,11 @@ class QueryStringHandler {
             });
             keys_and_values = temp_array;
         }
+        keys_and_values.forEach((element) => { //Validate data in array
+            if (!["string", "number"].includes(typeof element)){
+                throw "Array/object contains invalid data type (only strings, numbers allowed)";
+            }
+        });
         var query_string = "?";
         if ((keys_and_values.length % 2) === 0){ //i.e. if even numbers, meaning valid number of key/value pairs
             keys_and_values.forEach(function(element, index){
