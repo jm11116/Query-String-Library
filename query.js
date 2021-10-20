@@ -125,7 +125,7 @@ class QueryStringHandler {
             var values = [];
             if (keyValuesArray.includes(key)){
                 keyValuesArray.forEach((element, index) => {
-                    if (element == key && index != keyValuesArray.length){
+                    if (element === key && index != keyValuesArray.length){
                         values.push(keyValuesArray[index + 1]);
                     }
                 });
@@ -266,7 +266,7 @@ class QueryStringHandler {
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
             keyValuesArray.forEach((element, i) => {
-                if (element == key && keyValuesArray.indexOf(element) != keyValuesArray.length){
+                if (element === key && keyValuesArray.indexOf(element) != keyValuesArray.length){
                     keyValuesArray[i + 1] = new_value; 
                 }
             });
@@ -300,3 +300,5 @@ class QueryStringHandler {
 }
 
 var query = new QueryStringHandler();
+
+//Just coerce integers/floats to strings and keep exact match checking?
