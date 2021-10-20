@@ -20,7 +20,7 @@ class QueryStringHandler {
             }
             return valid;
         } else {
-            throw "Query string not found.";
+            throw "Query string not found";
         }
     }
     hasDuplicateKeys() {
@@ -35,7 +35,7 @@ class QueryStringHandler {
             });
             return found;
         } else {
-            throw "Query string not found or is not valid.";
+            throw "Query string not found or is not valid";
         }
     }
     getDuplicateKeys(){
@@ -55,7 +55,7 @@ class QueryStringHandler {
                 return duplicates;
             }
         } else {
-            throw "Query string not found or is not valid.";
+            throw "Query string not found or is not valid";
         }
         //Each iteration pushes element in keys array to a test array and checks to see if an identical value has already been pushed there. If it has, it pushes the element to the duplicates array.
     }
@@ -80,7 +80,7 @@ class QueryStringHandler {
         if (this.present()){
             return this.parts("query").split(/\?|\=|\&/g);
         } else {
-            throw "Query string not found.";
+            throw "Query string not found";
         }
     }
     keys(){
@@ -94,7 +94,7 @@ class QueryStringHandler {
             });
             return keys_array;
         } else {
-            throw "Invalid query string.";
+            throw "Invalid query string";
         }
     }
     values(){
@@ -108,7 +108,7 @@ class QueryStringHandler {
             });
             return values_array;
         } else {
-            throw "Invalid query string.";
+            throw "Invalid query string";
         }
     }
     getValueFromKey(key){
@@ -141,7 +141,7 @@ class QueryStringHandler {
                 return false; //Returns false to enable function to check if key present
             }
         } else {
-            throw "Query string not found.";
+            throw "Query string not found";
         }
     }
     getKeyFromValue(value){
@@ -325,7 +325,7 @@ class QueryStringHandler {
         }
         keys_and_values.forEach((element) => { //Validate data in array
             if (typeof element === "object"){
-                throw "Invalid data type in object or array; multi-level objects not allowed";
+                throw "Invalid data type in object or array: multi-level objects not allowed";
             } else if (!["string", "number"].includes(typeof element)){
                 throw "Array/object contains invalid data type (only strings, numbers allowed)";
             }
