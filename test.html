@@ -4,8 +4,18 @@
 </head>
 <body>
 <script>
-console.log(query.replaceFullString(["key", "Value", "Lex", "Luthor", "Jonathan", "kent"]));
+
+query.replaceFullString({
+    "Key": "Value",
+    "New": "Entry",
+    "Luthor": "Corp", 
+    "Lex": "Luthor", 
+    "Jonathan": "Kent",
+    "Lois": "Lane"
+});
+query.replaceFullString(["key", "value", "luthor", "Corp"]);
 query.convertToLowerCase();
+
 </script>
 </body>
 </html>

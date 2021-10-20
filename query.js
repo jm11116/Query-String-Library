@@ -1,9 +1,6 @@
 class QueryStringHandler {
-    constructor(){
-        this.url = window.location.href;
-    }
     present(){
-        if (this.url.indexOf("?") === -1){
+        if (window.location.href.indexOf("?") === -1){
             return false;
         } else {
             return true;
@@ -72,7 +69,7 @@ class QueryStringHandler {
         if (!["string"].includes(typeof part)){
             throw "Invalid data type at parameter 1 (string required)";
         }
-        var array = this.url.split("?");
+        var array = window.location.href.split("?");
         if (part === "url"){
             return array[0];
         } else if (part === "query" && this.present()){
@@ -307,17 +304,29 @@ class QueryStringHandler {
             throw "Query string not found.";
         }
     }
-    replaceFullString(key_value_array){
+    replaceFullString(keys_and_values){
         if (arguments.length != 1){
             throw "Invalid arguments number: 1 required";
         }
-        if (!Array.isArray(key_value_array)){
-            throw "Argument must be array";
+        if (Array.isArray(keys_and_values)){
+            var arg_data_type = "array";
+        } else if (typeof keys_and_values === "object"){
+            var arg_data_type = "object";
         }
-        var array = key_value_array;
+        if (!["array", "object"].includes(arg_data_type)){
+            throw "Argument must be an object or array containg key/value pairs";
+        }
+        if (arg_data_type === "object"){
+            var temp_array = [];
+            Object.keys(keys_and_values).forEach((key) => {
+                temp_array.push(key);
+                temp_array.push(keys_and_values[key]);
+            });
+            keys_and_values = temp_array;
+        }
         var query_string = "?";
-        if ((array.length % 2) === 0){ //i.e. if even numbers, meaning valid number of key/value pairs
-            array.forEach(function(element, index){
+        if ((keys_and_values.length % 2) === 0){ //i.e. if even numbers, meaning valid number of key/value pairs
+            keys_and_values.forEach(function(element, index){
                 if ((index % 2) === 0){
                     query_string = query_string + element + "=";
                 } else {
@@ -328,7 +337,7 @@ class QueryStringHandler {
             window.history.replaceState("", "", this.parts("url") + query_string);
             return true;
         } else {
-            throw "Argument must be an even number of key/value pairs";
+            throw "Argument must contain an even number of key/value pairs";
         }
     }
     convertToLowerCase(){
