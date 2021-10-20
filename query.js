@@ -28,7 +28,7 @@ class QueryStringHandler {
     }
     hasDuplicateKeys() {
         var found = false;
-        if (this.present()){
+        if (this.present() && this.isValid()){
             this.keys().forEach((element, i) => {
                 var key_array = this.keys(); //Get a fresh array of keys every iteration
                 key_array.splice(i, 1); //Removes current element & checks to see if it can still be found in array
@@ -38,19 +38,23 @@ class QueryStringHandler {
             });
             return found;
         } else {
-            throw "Query string not found.";
+            throw "Query string not found or is not valid.";
         }
     }
     parts(part){
-        if (this.present()){
-            var array = this.url.split("?");
-            if (part === "url"){
-                return array[0];
-            } else if (part === "query"){
-                return array[1];
-            }
-        } else {
-            return false;
+        if (part === undefined || !["url", "query"].includes(part)){
+            throw "Invalid argument";
+        }
+        if (!["string", "number"].includes(typeof part)){
+            throw "Invalid data type";
+        }
+        var array = this.url.split("?");
+        if (part === "url"){
+            return array[0];
+        } else if (part === "query" && this.present()){
+            return array[1];
+        } else if (part === "query" && !this.present()){
+            throw "Query string not found.";
         }
     }
     toKeyValuesArray(){
@@ -89,18 +93,32 @@ class QueryStringHandler {
         }
     }
     getValueFromKey(key){
+        if (key === undefined){
+            throw "Invalid argument";
+        }
+        if (!["string", "number"].includes(typeof key)){
+            throw "Invalid data type";
+        }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
             if (keyValuesArray.includes(key)){
                 var valuePos = keyValuesArray.indexOf(key) + 1;
                 return keyValuesArray[valuePos];
             } else {
-                throw "Key not found.";
+                return false; //Returns false to enable function to check if key present
             }
+        } else {
+            throw "Query string not found.";
         }
         //Should return array if multiple keys of same name are present
     }
     getKeyFromValue(value){
+        if (value === undefined){
+            throw "Invalid argument";
+        }
+        if (!["string", "number"].includes(typeof value)){
+            throw "Invalid data type";
+        }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
             if (keyValuesArray.includes(value)){
@@ -110,7 +128,7 @@ class QueryStringHandler {
                 throw "Value not found.";
             }
         } else {
-            return false;
+            throw "Query string not found.";
         }
         //Should return array if multiple values of same name are present
     }
@@ -133,9 +151,18 @@ class QueryStringHandler {
         }
     }
     append(key, value){
-        var existing = "?" + this.parts("query") + "&";
-        var combined = existing + key + "=" + value;
+        if (key === undefined || value === undefined){
+            throw "Invalid argument";
+        }
+        if (!["string", "number"].includes(typeof key)){
+            throw "Invalid data type";
+        }
+        if (!["string", "number"].includes(typeof value)){
+            throw "Invalid data type";
+        }
         if (this.present() === true){
+            var existing = "?" + this.parts("query") + "&";
+            var combined = existing + key + "=" + value;
             window.history.replaceState("", "", combined);
         } else {
             window.history.replaceState("", "", "?" + key + "=" + value);
@@ -143,7 +170,13 @@ class QueryStringHandler {
         return true;
     }
     removeKeyValue(key){
-        if (this.present() && this.getKeyFromValue(key) != false){
+        if (key === undefined){
+            throw "Invalid argument";
+        }
+        if (!["string", "number"].includes(typeof key)){
+            throw "Invalid data type";
+        }
+        if (this.present() && this.getKeyFromValue(key) != false){ //If key present
             var query_string = this.parts("query");
             var value = this.getValueFromKey(key);
             var left_ampersand = query_string.charAt(query_string.indexOf(key) - 1) === "&"; //Bool
@@ -161,19 +194,24 @@ class QueryStringHandler {
             window.history.replaceState("", "", this.parts("url") + "?" + query_string);
             return true;
         } else {
-            return false;
+            throw "Could not find key in query string.";
         }
     }
     removeAll(){
-        if (this.present()){
-            window.history.replaceState("", "", this.parts("url"));
-            return true;
-        } else {
-            return false;
-        }
+        window.history.replaceState("", "", window.location.href.split("?")[0]);
+        return true;
     }
     updateKey(key, new_name){
-        if (this.present() && key != undefined && new_name != undefined){
+        if (key === undefined || new_name === undefined){
+            throw "Invalid argument";
+        }
+        if (!["string", "number"].includes(typeof key)){
+            throw "Invalid data type";
+        }
+        if (!["string", "number"].includes(typeof new_name)){
+            throw "Invalid data type";
+        }
+        if (this.present()){
             var query_string = this.parts("query");
             if (query_string.indexOf(key) != -1){
                 query_string = query_string.replaceAll(key, new_name);
@@ -183,25 +221,34 @@ class QueryStringHandler {
                 return false;
             }
         } else {
-            return false;
+            throw "Query string not found.";
         }
     }
     updateValue(key, new_value){
-        if (this.present() && key != undefined && new_value != undefined){
-            var query_string = this.parts("query");
-            if (query_string.indexOf(key) != -1){ //If key present in string
-                var value_to_replace = this.getValueFromKey(key);
-                query_string = query_string.replaceAll(value_to_replace, new_value);
-                window.history.replaceState("", "", this.parts("url") + "?" + query_string);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+        if (key === undefined || new_value === undefined){
+            throw "Invalid argument";
         }
+        if (!["string", "number"].includes(typeof key)){
+            throw "Invalid data type";
+        }
+        if (!["string", "number"].includes(typeof new_value)){
+            throw "Invalid data type";
+        }
+        if (this.present()){
+            var query_string = this.parts("query");
+            var value_to_replace = this.getValueFromKey(key);
+            query_string = query_string.replaceAll(value_to_replace, new_value);
+            window.history.replaceState("", "", this.parts("url") + "?" + query_string);
+            return true;
+        } else {
+            throw "Query string not found.";
+        }
+        //Method will replace both key and value if they're the same, need to target it to specific value, probably with equals sign
     }
     replaceFullString(key_value_array){
+        if (!Array.isArray(key_value_array)){
+            throw "Argument must be array";
+        }
         var array = key_value_array;
         var query_string = "?";
         if ((array.length % 2) === 0){ //i.e. if even numbers, meaning valid number of key/value pairs
@@ -216,7 +263,7 @@ class QueryStringHandler {
             window.history.replaceState("", "", this.parts("url") + query_string);
             return true;
         } else {
-            return false;
+            throw "Argument must be an even number of key/value pairs";
         }
     }
 }
