@@ -235,15 +235,14 @@ class QueryStringHandler {
             throw "Invalid data type";
         }
         if (this.present()){
-            var query_string = this.parts("query");
-            var value_to_replace = this.getValueFromKey(key);
-            query_string = query_string.replaceAll(value_to_replace, new_value);
-            window.history.replaceState("", "", this.parts("url") + "?" + query_string);
+            var keyValuesArray = this.toKeyValuesArray();
+            keyValuesArray.splice(keyValuesArray.indexOf(key) + 1, 1, new_value);
+            this.replaceFullString(keyValuesArray);
             return true;
         } else {
             throw "Query string not found.";
         }
-        //Method will replace both key and value if they're the same, need to target it to specific value, probably with equals sign
+        //Only works on first occurence of key in query string
     }
     replaceFullString(key_value_array){
         if (!Array.isArray(key_value_array)){
