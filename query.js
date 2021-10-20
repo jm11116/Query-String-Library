@@ -125,7 +125,7 @@ class QueryStringHandler {
             var values = [];
             if (keyValuesArray.includes(key)){
                 keyValuesArray.forEach((element, index) => {
-                    if (element === key && index != keyValuesArray.length){
+                    if (element === key && index != keyValuesArray.length){ //Key can't be the last item in string
                         values.push(keyValuesArray[index + 1]);
                     }
                 });
@@ -150,16 +150,24 @@ class QueryStringHandler {
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
+            var keys = [];
             if (keyValuesArray.includes(value)){
-                var valuePos = keyValuesArray.indexOf(value) - 1;
-                return keyValuesArray[valuePos];
+                keyValuesArray.forEach((element, index) => {
+                    if ((index % 2) != 0 && element === value){
+                        keys.push(keyValuesArray[index - 1]);
+                    }
+                });
+                if (keys.length === 1){
+                    return keys[0];
+                } else {
+                    return keys;
+                }
             } else {
                 throw "Value not found.";
             }
         } else {
             throw "Query string not found.";
         }
-        //Should return array if multiple values of same name are present
     }
     toObject(){
         if (this.present() && this.isValid()){
