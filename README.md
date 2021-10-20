@@ -9,6 +9,8 @@
 
 **hasDuplicateKeys()** - will search query string for duplicate keys and return true if it finds them or false if it does not.
 
+**getDuplicateKeys()** - will return an array of duplicate keys if it can find any and false if it cannot.
+
 **parts(*part*)** = will return either the url or the query string as a string if passed either "url" or "query" as parameters.
 
 **toKeyValuesArray()** - will return a flat array containing all keys and values.
