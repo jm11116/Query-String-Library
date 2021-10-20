@@ -336,5 +336,3 @@ class QueryStringHandler {
 }
 
 var query = new QueryStringHandler();
-
-//Just coerce integers/floats to strings and keep exact match checking?
