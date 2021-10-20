@@ -27,6 +27,12 @@ class QueryStringHandler {
         }
     }
     parts(part){
+        if (part != "url" || part != "query"){
+            throw "Invalid argument. Please specify url part."
+        }
+        if (typeof part != "string" || typeof part != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
         if (this.present()){
             var array = this.url.split("?");
             if (part === "url"){
@@ -74,6 +80,12 @@ class QueryStringHandler {
         }
     }
     getValueFromKey(key){
+        if (key === undefined || key === null){
+            throw "Argument required (key).";
+        }
+        if (typeof key != "string" || typeof key != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
             if (keyValuesArray.includes(key)){
@@ -82,10 +94,18 @@ class QueryStringHandler {
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
         //Should return array if multiple keys of same name are present
     }
     getKeyFromValue(value){
+        if (key === undefined || key === null){
+            throw "Argument required (value).";
+        }
+        if (typeof value != "string" || typeof value != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
             if (keyValuesArray.includes(value)){
@@ -118,6 +138,15 @@ class QueryStringHandler {
         }
     }
     append(key, value){
+        if (key === undefined || key === null || value === undefined || value === null){
+            throw "Invalid arguments: key, value required.";
+        }
+        if (typeof key != "string" || typeof key != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
+        if (typeof value != "string" || typeof value != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
         if (this.present()){
             var existing = "?" + this.parts("query") + "&";
             var combined = existing + key + "=" + value;
@@ -133,6 +162,12 @@ class QueryStringHandler {
         }
     }
     removeKeyValue(key){
+        if (key === undefined || key === null){
+            throw "Key required.";
+        }
+        if (typeof key != "string" || typeof key != "number") {
+            throw "Invalid argument, string or integer required.";
+        }
         if (this.present() && this.getKeyFromValue(key) != false){
             var query_string = this.parts("query");
             var value = this.getValueFromKey(key);
@@ -163,7 +198,16 @@ class QueryStringHandler {
         }
     }
     updateKey(key, new_name){
-        if (this.present() && key != undefined && new_name != undefined){
+        if (key === undefined || key === null || new_name === undefined || new_name === null){
+            throw "Invalid arguments: key, new_name required.";
+        }
+        if (typeof key != "string" || typeof key != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
+        if (typeof new_name != "string" || typeof new_name != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
+        if (this.present()){
             var query_string = this.parts("query");
             if (query_string.indexOf(key) != -1){
                 query_string = query_string.replaceAll(key, new_name);
@@ -177,6 +221,15 @@ class QueryStringHandler {
         }
     }
     updateValue(key, new_value){
+        if (key === undefined || key === null || new_value === undefined || new_value === null){
+            throw "Invalid arguments: key, new_value required.";
+        }
+        if (typeof key != "string" || typeof key != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
+        if (typeof new_value != "string" || typeof new_value != "number") {
+            throw "Invalid argument: string or integer required.";
+        }
         if (this.present() && key != undefined && new_value != undefined){
             var query_string = this.parts("query");
             if (query_string.indexOf(key) != -1){ //If key present in string
@@ -192,6 +245,12 @@ class QueryStringHandler {
         }
     }
     replaceFullString(key_value_array){
+        if (key_value_array === undefined || key_value_array === null){
+            throw "Invalid argument: key value array required.";
+        }
+        if (!Array.isArray(key_value_array)){
+            throw "Argument is not an array.";
+        }
         var array = key_value_array;
         var query_string = "?";
         if ((array.length % 2) === 0){ //i.e. if even numbers, meaning valid number of key/value pairs
@@ -206,9 +265,11 @@ class QueryStringHandler {
             window.history.replaceState("", "", this.parts("url") + query_string);
             return true;
         } else {
-            return false;
+            throw "Invalid key/value pair given.";
         }
     }
 }
 
 var query = new QueryStringHandler();
+
+query.parts();
