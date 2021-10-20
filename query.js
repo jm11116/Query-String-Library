@@ -125,14 +125,16 @@ class QueryStringHandler {
             var values = [];
             if (keyValuesArray.includes(key)){
                 keyValuesArray.forEach((element, index) => {
-                    if (element === key && index != keyValuesArray.length){ //Key can't be the last item in string
+                    if ((index % 2) === 0 && element === key && index != keyValuesArray.length){
                         values.push(keyValuesArray[index + 1]);
                     }
                 });
                 if (values.length === 1){
                     return values[0];
-                } else {
+                } else if (values.length > 1){
                     return values;
+                } else {
+                    return false;
                 }
             } else {
                 return false; //Returns false to enable function to check if key present
@@ -159,8 +161,10 @@ class QueryStringHandler {
                 });
                 if (keys.length === 1){
                     return keys[0];
-                } else {
+                } else if (keys.length > 1) {
                     return keys;
+                } else {
+                    return false;
                 }
             } else {
                 return false; //Returns false to enable function to check if value is present at all
