@@ -63,10 +63,13 @@ class QueryStringHandler {
         //Each iteration pushes element in keys array to a test array and checks to see if an identical value has already been pushed there. If it has, it pushes the element to the duplicates array.
     }
     parts(part){
+        if (arguments.length > 1){
+            throw "Invalid arguments number: only 1 permitted";
+        }
         if (part === undefined || !["url", "query"].includes(part)){
             throw "Invalid argument";
         }
-        if (!["string", "number"].includes(typeof part)){
+        if (!["string"].includes(typeof part)){
             throw "Invalid data type";
         }
         var array = this.url.split("?");
@@ -114,6 +117,9 @@ class QueryStringHandler {
         }
     }
     getValueFromKey(key){
+        if (arguments.length > 1){
+            throw "Invalid arguments number: only 1 permitted";
+        }
         if (key === undefined){
             throw "Invalid argument";
         }
@@ -125,7 +131,7 @@ class QueryStringHandler {
             var values = [];
             if (keyValuesArray.includes(key)){
                 keyValuesArray.forEach((element, index) => {
-                    if ((index % 2) === 0 && element === key && index != keyValuesArray.length){
+                    if ((index % 2) === 0 && element == key && index != keyValuesArray.length){
                         values.push(keyValuesArray[index + 1]);
                     }
                 });
@@ -144,6 +150,9 @@ class QueryStringHandler {
         }
     }
     getKeyFromValue(value){
+        if (arguments.length > 1){
+            throw "Invalid arguments number: only 1 permitted";
+        }
         if (value === undefined){
             throw "Invalid argument";
         }
@@ -155,7 +164,7 @@ class QueryStringHandler {
             var keys = [];
             if (keyValuesArray.includes(value)){
                 keyValuesArray.forEach((element, index) => {
-                    if ((index % 2) != 0 && element === value){
+                    if ((index % 2) != 0 && element == value){
                         keys.push(keyValuesArray[index - 1]);
                     }
                 });
@@ -192,6 +201,9 @@ class QueryStringHandler {
         }
     }
     append(key, value){
+        if (arguments.length > 2){
+            throw "Invalid arguments number: only 2 permitted";
+        }
         if (key === undefined || value === undefined){
             throw "Invalid argument";
         }
@@ -201,7 +213,7 @@ class QueryStringHandler {
         if (!["string", "number"].includes(typeof value)){
             throw "Invalid data type";
         }
-        if (this.present() === true){
+        if (this.present()){
             var existing = "?" + this.parts("query") + "&";
             var combined = existing + key + "=" + value;
             window.history.replaceState("", "", combined);
@@ -211,6 +223,9 @@ class QueryStringHandler {
         return true;
     }
     removeKeyValue(key){
+        if (arguments.length > 1){
+            throw "Invalid arguments number: only 1 permitted";
+        }
         if (key === undefined){
             throw "Invalid argument";
         }
@@ -243,6 +258,9 @@ class QueryStringHandler {
         return true;
     }
     updateKey(key, new_name){
+        if (arguments.length > 2){
+            throw "Invalid arguments number: only 2 permitted";
+        }
         if (key === undefined || new_name === undefined){
             throw "Invalid argument";
         }
@@ -266,6 +284,9 @@ class QueryStringHandler {
         }
     }
     updateValue(key, new_value){
+        if (arguments.length > 2){
+            throw "Invalid arguments number: only 2 permitted";
+        }
         if (key === undefined || new_value === undefined){
             throw "Invalid argument";
         }
@@ -289,6 +310,9 @@ class QueryStringHandler {
         }
     }
     replaceFullString(key_value_array){
+        if (arguments.length > 1){
+            throw "Invalid arguments number: only 1 permitted";
+        }
         if (!Array.isArray(key_value_array)){
             throw "Argument must be array";
         }
