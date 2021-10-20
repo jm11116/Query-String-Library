@@ -41,6 +41,27 @@ class QueryStringHandler {
             throw "Query string not found or is not valid.";
         }
     }
+    getDuplicateKeys(){
+        if (this.present() && this.isValid()){
+            var keys_array = this.keys();
+            var test_array = [];
+            var duplicates = [];
+            keys_array.forEach((element) => {
+                if (test_array.includes(element)){
+                    duplicates.push(element);
+                }
+                test_array.push(element);
+            });
+            if (duplicates.length === 0){
+                return false;
+            } else {
+                return duplicates;
+            }
+        } else {
+            throw "Query string not found or is not valid.";
+        }
+        //Each iteration pushes element in keys array to a test array and checks to see if an identical value has already been pushed there. If it has, it pushes the element to the duplicates array.
+    }
     parts(part){
         if (part === undefined || !["url", "query"].includes(part)){
             throw "Invalid argument";
