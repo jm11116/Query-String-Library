@@ -317,7 +317,7 @@ class QueryStringHandler {
             throw "Argument must be an object or array containg key/value pairs";
         }
         if (arg_data_type === "object"){
-            Object.keys(keys_and_values).forEach((key, index) => {
+            Object.keys(keys_and_values).forEach((key) => {
                 if (typeof keys_and_values[key] === "object"){
                     throw "Object must only contain key/value pairs; multi-level objects not allowed";
                 }
