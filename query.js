@@ -163,7 +163,7 @@ class QueryStringHandler {
                     return keys;
                 }
             } else {
-                throw "Value not found.";
+                return false; //Returns false to enable function to check if value is present at all
             }
         } else {
             throw "Query string not found.";
