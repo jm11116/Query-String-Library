@@ -29,9 +29,9 @@
 
 **removeKeyValue(*key*)** - will remove a key and its value when passed a valid key as a parameter.
 
-**updateKey(*key*, *new_name*)** - will change the name of a key in the query string when passed the key's existing name and its new name as arguments.
+**updateKey(*key*, *new_name*)** - will change the name of all matching keys in the query string when passed the keys' existing name and their new name as arguments.
 
-**updateValue(*key*, *new_value*)** - will change the value of a key in the query string when passed the key and the new value as parameters.
+**updateValue(*key*, *new_value*)** - will change the value of all matching keys in the query string when passed the key and the new value as parameters.
 
 **replaceFullString(*key_value_array*)** - will replace the entire query string with a new query string when passed an array of key/value pairs.
 
