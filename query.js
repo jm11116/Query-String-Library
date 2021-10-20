@@ -70,7 +70,7 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string"].includes(typeof part)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string required)";
         }
         var array = this.url.split("?");
         if (part === "url"){
@@ -124,7 +124,7 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof key)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string or integer required)";
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
@@ -157,7 +157,7 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof value)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string or integer required)";
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
@@ -208,10 +208,10 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof key)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string or number required)";
         }
         if (!["string", "number"].includes(typeof value)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 2 (string or number required)";
         }
         if (this.present()){
             var existing = "?" + this.parts("query") + "&";
@@ -230,7 +230,7 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof key)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string or number required)";
         }
         if (this.present() && this.getKeyFromValue(key) != false){ //If key present
             var query_string = this.parts("query");
@@ -265,10 +265,10 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof key)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string or number required)";
         }
         if (!["string", "number"].includes(typeof new_name)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 2 (string or number required)";
         }
         if (this.present()){
             var query_string = this.parts("query");
@@ -291,10 +291,10 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof key)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 1 (string or number required)";
         }
         if (!["string", "number"].includes(typeof new_value)){
-            throw "Invalid data type";
+            throw "Invalid data type at parameter 2 (string or number required)";
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
