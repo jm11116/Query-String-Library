@@ -132,6 +132,7 @@ class QueryStringHandler {
             throw "Query string not found.";
         }
         //Should return array if multiple keys of same name are present
+        //Implement by looping through with forEach and checking for key name match then getting value with indexOf + 1
     }
     getKeyFromValue(value){
         if (value === undefined){
