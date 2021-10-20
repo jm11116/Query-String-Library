@@ -124,7 +124,7 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof key)){
-            throw "Invalid data type at parameter 1 (string or integer required)";
+            throw "Invalid data type at parameter 1 (string or number required)";
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
@@ -157,7 +157,7 @@ class QueryStringHandler {
             throw "Invalid argument";
         }
         if (!["string", "number"].includes(typeof value)){
-            throw "Invalid data type at parameter 1 (string or integer required)";
+            throw "Invalid data type at parameter 1 (string or number required)";
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
