@@ -325,7 +325,9 @@ class QueryStringHandler {
             keys_and_values = temp_array;
         }
         keys_and_values.forEach((element) => { //Validate data in array
-            if (!["string", "number"].includes(typeof element)){
+            if (typeof element === "object"){
+                throw "Invalid data type in object or array; multi-level objects not allowed"
+            } else if (!["string", "number"].includes(typeof element)){
                 throw "Array/object contains invalid data type (only strings, numbers allowed)";
             }
         });
