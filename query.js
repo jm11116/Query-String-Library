@@ -257,13 +257,16 @@ class QueryStringHandler {
         }
         if (this.present()){
             var keyValuesArray = this.toKeyValuesArray();
-            keyValuesArray.splice(keyValuesArray.indexOf(key) + 1, 1, new_value);
+            keyValuesArray.forEach((element, i) => {
+                if (element == key && keyValuesArray.indexOf(element) != keyValuesArray.length){
+                    keyValuesArray[i + 1] = new_value; 
+                }
+            });
             this.replaceFullString(keyValuesArray);
             return true;
         } else {
             throw "Query string not found.";
         }
-        //Only works on first occurence of key in query string
     }
     replaceFullString(key_value_array){
         if (!Array.isArray(key_value_array)){
