@@ -77,8 +77,6 @@ class QueryStringHandler {
             return array[0];
         } else if (part === "query" && this.present()){
             return array[1];
-        } else if (part === "query" && !this.present()){
-            throw "Query string not found.";
         }
     }
     toKeyValuesArray(){
@@ -331,6 +329,12 @@ class QueryStringHandler {
             return true;
         } else {
             throw "Argument must be an even number of key/value pairs";
+        }
+    }
+    convertToLowerCase(){
+        if (this.present()){
+            window.history.replaceState("", "", this.parts("url") + "?" + this.parts("query").toLowerCase());
+            return true;
         }
     }
 }
